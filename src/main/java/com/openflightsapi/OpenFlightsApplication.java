@@ -1,14 +1,12 @@
-package com.openflightsapi.aeroports;
+package com.openflightsapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AeroportsApplication {
+public class OpenFlightsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AeroportsApplication.class, args);
+        SpringApplication.run(OpenFlightsApplication.class, args);
     }
-
 }
-

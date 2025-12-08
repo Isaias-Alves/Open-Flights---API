@@ -38,7 +38,7 @@ class AeroportoControllerIT {
 
     @Test
     void deveBuscarAeroportoPorIataCorretamente() {
-        String url = "http://localhost:" + port + "/api/v1/aeroportos/iata/MAG";
+        String url = "http://localhost:" + port + "/api/v1/aeroportos/MAG";
         ResponseEntity<Aeroporto> resposta = restTemplate.getForEntity(url, Aeroporto.class);
 
         Assertions.assertEquals(HttpStatus.OK, resposta.getStatusCode());
@@ -82,7 +82,7 @@ class AeroportoControllerIT {
         String urlBase = "http://localhost:" + port + "/api/v1/aeroportos";
         restTemplate.postForLocation(urlBase, temp);
 
-        String urlUpdate = urlBase + "/iata/" + iataTemp;
+        String urlUpdate = urlBase + "/" + iataTemp;
 
         Aeroporto paraAtualizar = restTemplate.getForObject(urlUpdate, Aeroporto.class);
         paraAtualizar.setNomeAeroporto("Nome Atualizado");
@@ -108,7 +108,7 @@ class AeroportoControllerIT {
         String urlBase = "http://localhost:" + port + "/api/v1/aeroportos";
         restTemplate.postForLocation(urlBase, descartavel);
 
-        String urlDel = urlBase + "/iata/" + iataTemp;
+        String urlDel = urlBase + "/" + iataTemp;
         restTemplate.delete(urlDel);
 
         ResponseEntity<Aeroporto> resposta = restTemplate.getForEntity(urlDel, Aeroporto.class);

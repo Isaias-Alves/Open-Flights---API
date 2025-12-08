@@ -21,7 +21,7 @@ public class AeroportoController {
         return ResponseEntity.ok(service.listarTodos());
     }
 
-    @GetMapping("/iata/{iata}")
+    @GetMapping("/{iata}")
     public ResponseEntity<Aeroporto> buscarPorIata(@PathVariable String iata) {
         try {
             return ResponseEntity.ok(service.buscarPorIata(iata));
@@ -40,7 +40,7 @@ public class AeroportoController {
         }
     }
 
-    @PutMapping("/iata/{iata}")
+    @PutMapping("/{iata}")
     public ResponseEntity<Aeroporto> atualizar(@PathVariable String iata, @RequestBody Aeroporto aeroporto) {
         try {
             aeroporto.setCodigoIata(iata);
@@ -50,7 +50,7 @@ public class AeroportoController {
         }
     }
 
-    @DeleteMapping("/iata/{iata}")
+    @DeleteMapping("/{iata}")
     public ResponseEntity<Void> deletar(@PathVariable String iata) {
         try {
             service.deletar(iata);

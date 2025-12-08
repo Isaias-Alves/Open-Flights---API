@@ -21,7 +21,7 @@ public class AeroportoController {
         return ResponseEntity.ok(service.listarTodos());
     }
 
-    @GetMapping("/{iata}")
+    @GetMapping("/iata/{iata}")
     public ResponseEntity<Aeroporto> buscarPorIata(@PathVariable String iata) {
         try {
             return ResponseEntity.ok(service.buscarPorIata(iata));

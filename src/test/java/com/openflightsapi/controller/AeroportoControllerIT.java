@@ -32,7 +32,7 @@ class AeroportoControllerIT {
 
     @Test
     void deveBuscarAeroportoPorIataCorretamente() {
-        String url = "http://localhost:" + port + "/api/v1/aeroportos/iata/BR";
+        String url = "http://localhost:" + port + "/api/v1/aeroportos/iata/GKA";
         ResponseEntity<Aeroporto> resposta = restTemplate.getForEntity(url, Aeroporto.class);
 
         Assertions.assertEquals(HttpStatus.OK, resposta.getStatusCode());

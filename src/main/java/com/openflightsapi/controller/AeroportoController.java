@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController // Diz ao Spring: "Isso é uma API REST que responde JSON"
-@RequestMapping("/api/v1/aeroportos") // Define o prefixo da URL para todos os métodos
+@RestController
+@RequestMapping("/api/v1/aeroportos")
 public class AeroportoController {
 
     @Autowired

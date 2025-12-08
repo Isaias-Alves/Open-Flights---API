@@ -1,5 +1,6 @@
 package com.openflightsapi.service;
 
+import com.openflightsapi.exception.AeroportoNaoEncontradoException;
 import com.openflightsapi.model.Aeroporto;
 import com.openflightsapi.repository.AeroportoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AeroportoService {
@@ -19,8 +21,13 @@ public class AeroportoService {
     }
 
     public Aeroporto buscarPorIata(String iata) {
-        return repository.findByCodigoIata(iata)
-                .orElseThrow(() -> new RuntimeException("Aeroporto não encontrado"));
+        Optional<Aeroporto> aeroporto = repository.findByCodigoIata(iata);
+
+        if (aeroporto.isEmpty()) {
+            throw new AeroportoNaoEncontradoException(iata);
+        }
+
+        return aeroporto.orElse(null);
     }
 
     public Aeroporto salvar(Aeroporto aeroporto) {
@@ -38,7 +45,7 @@ public class AeroportoService {
     @Transactional
     public void deletar(String iata) {
         if (!repository.existsByCodigoIata(iata)) {
-            throw new RuntimeException("Aeroporto não encontrado para deletar");
+            throw new AeroportoNaoEncontradoException(iata);
         }
         repository.deleteByCodigoIata(iata);
     }

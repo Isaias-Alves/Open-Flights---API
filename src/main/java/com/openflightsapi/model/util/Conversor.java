@@ -12,6 +12,9 @@ public class Conversor {
         for (String iso : Locale.getISOCountries()) {
             Locale l = new Locale("", iso);
             MAPA_NOMES_PARA_ISO.put(l.getDisplayCountry(Locale.ENGLISH), iso);
+
+            Locale portugues = new Locale("pt", "BR");
+            MAPA_NOMES_PARA_ISO.put(l.getDisplayCountry(portugues), iso);
         }
     }
 

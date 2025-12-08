@@ -40,7 +40,6 @@ class AeroportoServiceTest {
 
     @Test
     void deveLancarExcecaoQuandoNaoAcharIata() {
-        // CORREÇÃO AQUI: Não retorne null! Retorne uma caixa vazia.
         Mockito.when(repository.findByCodigoIata("ZZZ")).thenReturn(Optional.empty());
 
         Assertions.assertThrows(AeroportoNaoEncontradoException.class, () -> {
@@ -67,4 +66,18 @@ class AeroportoServiceTest {
             service.salvar(aeroporto);
         });
     }
+
+    @Test
+    void deveRejeitarIataComTamanhoInvalido() {
+        Aeroporto aeroporto = new Aeroporto();
+        aeroporto.setCodigoIata("ABCD");
+        aeroporto.setAltitude(100.0);
+
+        IllegalArgumentException erro = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            service.salvar(aeroporto);
+        });
+
+        Assertions.assertEquals("Código IATA deve ter exatamente 3 letras", erro.getMessage());
+    }
+
 }

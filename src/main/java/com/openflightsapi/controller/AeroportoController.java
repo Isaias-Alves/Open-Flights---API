@@ -40,7 +40,7 @@ public class AeroportoController {
         }
     }
 
-    @PutMapping("/{iata}")
+    @PutMapping("/iata/{iata}")
     public ResponseEntity<Aeroporto> atualizar(@PathVariable String iata, @RequestBody Aeroporto aeroporto) {
         try {
             aeroporto.setCodigoIata(iata);
@@ -50,7 +50,7 @@ public class AeroportoController {
         }
     }
 
-    @DeleteMapping("/{iata}")
+    @DeleteMapping("/iata/{iata}")
     public ResponseEntity<Void> deletar(@PathVariable String iata) {
         try {
             service.deletar(iata);

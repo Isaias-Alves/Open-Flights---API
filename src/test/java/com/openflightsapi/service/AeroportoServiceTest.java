@@ -27,6 +27,12 @@ class AeroportoServiceTest {
     }
 
     @Test
+    void deveConverterNomeDoPaisParaIso(){
+        String iso = service.obterIsoPais("Brazil");
+        Assertions.assertEquals("BR", iso);
+    }
+
+    @Test
     void deveLancarExcecaoQuandoNaoAcharIata() {
         // CORREÇÃO AQUI: Não retorne null! Retorne uma caixa vazia.
         Mockito.when(repository.findByCodigoIata("ZZZ")).thenReturn(Optional.empty());

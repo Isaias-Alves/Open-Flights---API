@@ -50,5 +50,7 @@ public class AeroportoService {
         return pes * 0.3048;
     }
 
-
+    public String obterIsoPais(String nomePais){
+        return com.openflightsapi.model.util.Conversor.obterIsoPais(nomePais);
+    }
 }

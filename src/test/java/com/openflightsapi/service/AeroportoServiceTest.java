@@ -27,8 +27,14 @@ class AeroportoServiceTest {
     }
 
     @Test
-    void deveConverterNomeDoPaisParaIso(){
+    void deveConverterNomeDoPaisParaIsoBrasil(){
         String iso = service.obterIsoPais("Brasil");
+        Assertions.assertEquals("BR", iso);
+    }
+
+    @Test
+    void deveConverterNomeDoPaisParaIsoEnglish(){
+        String iso = service.obterIsoPais("Brazil");
         Assertions.assertEquals("BR", iso);
     }
 

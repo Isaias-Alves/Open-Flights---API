@@ -28,7 +28,7 @@ class AeroportoServiceTest {
 
     @Test
     void deveConverterNomeDoPaisParaIso(){
-        String iso = service.obterIsoPais("Brazil");
+        String iso = service.obterIsoPais("Brasil");
         Assertions.assertEquals("BR", iso);
     }
 

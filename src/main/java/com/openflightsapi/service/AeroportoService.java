@@ -3,31 +3,27 @@ package com.openflightsapi.service;
 import com.openflightsapi.exception.AeroportoNaoEncontradoException;
 import com.openflightsapi.model.Aeroporto;
 import com.openflightsapi.repository.AeroportoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AeroportoService {
 
-    @Autowired
-    private AeroportoRepository repository;
+    private final AeroportoRepository repository;
+
+    public AeroportoService(AeroportoRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Aeroporto> listarTodos() {
         return repository.findAll();
     }
 
     public Aeroporto buscarPorIata(String iata) {
-        Optional<Aeroporto> aeroporto = repository.findByCodigoIata(iata);
-
-        if (aeroporto.isEmpty()) {
-            throw new AeroportoNaoEncontradoException(iata);
-        }
-
-        return aeroporto.orElse(null);
+        return repository.findByCodigoIata(iata)
+                .orElseThrow(() -> new AeroportoNaoEncontradoException(iata));
     }
 
     public Aeroporto salvar(Aeroporto aeroporto) {

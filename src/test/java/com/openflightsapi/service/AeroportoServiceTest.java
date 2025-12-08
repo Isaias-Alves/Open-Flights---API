@@ -4,21 +4,21 @@ import com.openflightsapi.exception.AeroportoNaoEncontradoException;
 import com.openflightsapi.model.Aeroporto;
 import com.openflightsapi.repository.AeroportoRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
+import java.util.Optional; // <--- Importante
 
-@ExtendWith(MockitoExtension.class)
 class AeroportoServiceTest {
 
-    @Mock
     private AeroportoRepository repository;
-
-    @InjectMocks
     private AeroportoService service;
+
+    @BeforeEach
+    void setup() {
+        repository = Mockito.mock(AeroportoRepository.class);
+        service = new AeroportoService(repository);
+    }
 
     @Test
     void deveConverterPesParaMetrosCorretamente() {
@@ -28,7 +28,8 @@ class AeroportoServiceTest {
 
     @Test
     void deveLancarExcecaoQuandoNaoAcharIata() {
-        Mockito.when(repository.findByCodigoIata("ZZZ")).thenReturn(null);
+        // CORREÇÃO AQUI: Não retorne null! Retorne uma caixa vazia.
+        Mockito.when(repository.findByCodigoIata("ZZZ")).thenReturn(Optional.empty());
 
         Assertions.assertThrows(AeroportoNaoEncontradoException.class, () -> {
             service.buscarPorIata("ZZZ");
